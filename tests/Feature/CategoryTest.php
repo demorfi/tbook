@@ -28,7 +28,7 @@ class CategoryTest extends TestCase
         $this->json('GET', '/api/categories')
             ->assertStatus(200)
             ->assertJson(['data' => $collect->toArray()])
-            ->assertJsonStructure(['data' => ['*' => ['id', 'name']]]);
+            ->assertJsonStructure(['data' => ['*' => ['id', 'name', 'products_path']]]);
     }
 
     /**

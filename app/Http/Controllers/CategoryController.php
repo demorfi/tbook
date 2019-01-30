@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Category as CategoryContract;
 use App\Http\Requests\{Create\Category as CreateCategoryRequest, Edit\Category as EditCategoryRequest};
-use App\Http\Resources\{CategoryCollection};
+use App\Http\Resources\{CategoryCollection, ProductCollection};
 
 /**
  * Class CategoryController.
@@ -21,6 +21,17 @@ class CategoryController extends Controller
     public function index()
     {
         return (CategoryCollection::make(CategoryContract::query()->paginate()));
+    }
+
+    /**
+     * Display a listing of all products in category.
+     *
+     * @param $category CategoryContract
+     * @return ProductCollection
+     */
+    public function show(CategoryContract $category)
+    {
+        return (ProductCollection::make($category->products()->paginate()));
     }
 
     /**
