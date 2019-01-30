@@ -13,3 +13,13 @@
 
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
+Route::get('categories', 'CategoryController@index');
+
+Route::group(
+    ['middleware' => 'auth:api'],
+    function () {
+        Route::post('categories', 'CategoryController@store');
+        Route::put('categories/{category}', 'CategoryController@update');
+        Route::delete('categories/{category}', 'CategoryController@destroy');
+    }
+);
